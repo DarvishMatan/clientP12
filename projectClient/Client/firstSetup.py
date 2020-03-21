@@ -2,30 +2,22 @@
 when client download the software, this is the first commands to be executed
 it connects to the website and get the message and the activation
 """
-
-
-from Client.finals import *
-import shelve
-import requests
+import shelves
 from Client.assisting import *
 
+
+
+
 try:
-    createShelfFolder()
+    create_vars_folder()
+    create_var(final.active_flag, 0)
+    create_var(final.active_field, 0)
+    create_var(final.messageField, "")
 except:
     pass
 
 
-shelf = shelve.open("../vars/vars.txt")  # directory for text file to save the vars
-get_activation = "http://defensiveblocks.pythonanywhere.com/clients/" + Finals.USERNAME + "/"
-get_message = "http://defensiveblocks.pythonanywhere.com/clientsm/" + Finals.USERNAME + "/"
-
-try:
-    r = requests.get(get_activation)
-    rm = requests.get(get_message)
-except:
-    raise Exception("Server Errors")
-
-
+"""
 activation = r.text
 message = rm.text
 print(activation)
@@ -36,3 +28,4 @@ elif activation == "1":
     shelf[Finals.activeField] = 1
     # TODO START THE LOCK COMMAND
 
+"""
