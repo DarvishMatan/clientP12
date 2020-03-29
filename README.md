@@ -1,4 +1,4 @@
-#Client side for my 12 grade prject
+<b>Client side for my 12 grade prject</b>
 
 This is the program which is installed on the users pcs.
 the program sends requests to my project website and checks if lock is on.
