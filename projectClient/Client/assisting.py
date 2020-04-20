@@ -8,6 +8,10 @@ from Client.finals import Finals as final
 
 
 
+def exb():
+    pass
+
+
 """
 I had to replace shelve - in order to save vars forever (shelve doesnt work)
 this are the funcs
@@ -33,6 +37,7 @@ def create_var(var,value):
     append_con.close()
     append_con.close()
 
+
 def replace(pattern, value):
     fh, abs_path = mkstemp()
     with fdopen(fh,'w') as new_file:
@@ -49,7 +54,7 @@ def replace(pattern, value):
 
 
 def get(pattern):
-    read_con = open(final.path, "r")
+    read_con = open(final.path, "r+")
     content = read_con.read()
     lines = content.split("\n")
     for line in lines:

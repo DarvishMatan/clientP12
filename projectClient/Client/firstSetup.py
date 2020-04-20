@@ -10,9 +10,9 @@ from Client.assisting import *
 
 try:
     create_vars_folder()
-    create_var(final.active_flag, 0)
     create_var(final.active_field, 0)
-    create_var(final.messageField, "")
+
+
 except:
     pass
 

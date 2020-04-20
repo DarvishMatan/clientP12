@@ -10,8 +10,7 @@ TODO get the username when download the software
 class Finals:
     USERNAME = "matandarvish"
     active_field = 'activation'
-    active_flag = "active_flag"
-    messageField = "message"
+    thread = "thread_field"
     path = "../vars/vars.txt"
     first_setup_path = "../vars/"
 

