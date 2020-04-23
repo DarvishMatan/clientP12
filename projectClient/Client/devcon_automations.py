@@ -34,9 +34,9 @@ array - the array of ids to be operated (can be NULL)
 
 def callDevcon(command, array):
     for obj in array:
-        c = "devcon " + command + " @\"" + obj + "\""
+        c = "devcon " + command + " \"@" + obj + "\""
         print(c)
-        output = check_output(c)
+        output = check_output(c, shell=True)
         print(output.decode())
 
 
@@ -46,10 +46,10 @@ def lock():
     mouse_devices = parser(devices, "mouse")
     Mouse_devices = parser(devices, "Mouse")
     keyboard_devices = parser(devices, "Keyboard")
-    #subprocess.call("devcon remove usb*")
     callDevcon("remove", mouse_devices)
     callDevcon("remove", Mouse_devices)
     callDevcon("remove", keyboard_devices)
+    subprocess.call("devcon remove usb*")
 
 
 
