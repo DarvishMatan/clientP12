@@ -11,7 +11,7 @@ from Client.assisting import *
 try:
     create_vars_folder()
     create_var(final.active_field, 0)
-
+    createDesktopFolder()
 
 except:
     pass

