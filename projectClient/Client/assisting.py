@@ -14,7 +14,7 @@ def popup():
 def createDesktopFolder():
     username = os.getlogin()    # Fetch username
     file = open(f'C:\\Users\\{username}\\Desktop\\DefensiveBlocks.txt','w')
-    file.write('Please signup in our site in order to use our service. link: https://defensiveblocks.pythonanywhere.com/')
+    file.write('Please signup in our site in order to use our service.\nlink: https://defensiveblocks.pythonanywhere.com/\nyour username is: '+ str(username))
     file.close()
 
 
