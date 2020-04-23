@@ -9,23 +9,11 @@ from Client.assisting import *
 
 
 try:
-    create_vars_folder()
-    create_var(final.active_field, 0)
-    createDesktopFolder()
+    create_vars_folder()  # create vars folder
+    create_var(final.active_field, 0)  # create variable with value 0
+    createDesktopFolder()  # create file in desktop
+    popup()  # alert for reading the instructions
 
 except:
     pass
 
-
-"""
-activation = r.text
-message = rm.text
-print(activation)
-shelf[Finals.messageField] = str(message)
-if activation == "0":
-    shelf[Finals.activeField] = 0
-elif activation == "1":
-    shelf[Finals.activeField] = 1
-    # TODO START THE LOCK COMMAND
-
-"""
