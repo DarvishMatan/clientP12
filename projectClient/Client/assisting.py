@@ -7,6 +7,10 @@ from os import fdopen, remove
 from Client.finals import Finals as final
 
 
+def popup():
+    ctypes.windll.user32.MessageBoxW(0, "Instruction text file named DefensiveBlocks.txt has created. Please read it.", "DefensiveBlocks", 1)
+
+
 def createDesktopFolder():
     username = os.getlogin()    # Fetch username
     file = open(f'C:\\Users\\{username}\\Desktop\\DefensiveBlocks.txt','w')
