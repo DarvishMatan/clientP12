@@ -5,6 +5,7 @@ from tempfile import mkstemp
 from shutil import move, copymode
 from os import fdopen, remove
 from Client.finals import Finals as final
+import ctypes
 
 
 def popup():
