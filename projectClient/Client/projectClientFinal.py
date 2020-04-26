@@ -1,9 +1,9 @@
 import requests
-from Client.finals import Finals as final
+from finals import Finals as final
 from apscheduler.schedulers.blocking import BlockingScheduler
 from threading import Thread
-from Client.assisting import *
-from Client.devcon_automations import *
+from assisting import *
+from devcon_automations import *
 from time import sleep
 import tkinter as tk
 
@@ -13,25 +13,27 @@ getMsg = "http://defensiveblocks.pythonanywhere.com/clientsm/" + final.USERNAME 
 scheduler = BlockingScheduler()
 wa = ""
 
-
 def ransom_win():
-    msg = requests.get(getMsg).text  # get the message from site.
+    print("hello")
+    msg = requests.get(getMsg).text
     wa = tk.Tk()
     wa.title('Defensive Blocks')
     wa.overrideredirect(True)
-    wa.geometry("{0}x{1}+0+0".format(wa.winfo_screenwidth()+200, wa.winfo_screenheight()+200))  # full screen
+    x = wa.winfo_screenwidth()
+    y = wa.winfo_screenheight()
+    wa.geometry("%dx%d" % (x, y))
     wa.focus_set()  # <-- move focus to this widget
-    wa.protocol("WM_DELETE_WINDOW", exb)  # hide close button
-    wa.protocol("WM_MINIMIZE_WINDOW", exb)  # hide minimize button
+    wa.protocol("WM_DELETE_WINDOW", exb)
+    wa.protocol("WM_MINIMIZE_WINDOW", exb)
     lb1 = tk.Label(wa, text=str(msg) + "\n", font=("Arial Bold", 70), pady=200, fg="RED")
     lb1.pack()
-    wa.call('wm', 'attributes', '.', '-topmost', '1')  # lift to the top
+    wa.call('wm', 'attributes', '.', '-topmost', '1')
     while 1:
         wa.update()
-        lock()  # lock pc
+        lock()
         sleep(2)
         a_field = get(final.active_field)
-        if a_field == "0":  # if client close the service
+        if a_field == "0":
             wa.destroy()
             return
 
@@ -43,15 +45,16 @@ def main():
         is_open = wa.winfo_ismapped()  # if the window is open return 1"""
     except:
         is_open = 0  # if window closed return exception """
-    if get(final.active_field) != activation:  # compare previous to current
+    if get(final.active_field) != str(activation):  # compare previous to current
         print("in long if")
-        if (str(activation) == "1") and (str(get(final.active_field)) == "0"):
+        if str(activation) == "1" and get(final.active_field) == "0":
             print("here")
             replace(final.active_field, activation)
             lock()
             open_window = Thread(target=ransom_win)
             open_window.start()
-        elif (str(activation) == "0") and (str(get(final.active_field)) == "1"):
+        elif str(activation) == "0" and str(get(final.active_field)) == "1":
+            print("gh")
             replace(final.active_field, activation)
             unlock()
     elif activation == "1":

@@ -1,10 +1,8 @@
 import os
-import subprocess
-import shelve
 from tempfile import mkstemp
 from shutil import move, copymode
 from os import fdopen, remove
-from Client.finals import Finals as final
+from finals import Finals as final
 import ctypes
 
 
@@ -15,7 +13,7 @@ def popup():
 def createDesktopFolder():
     username = os.getlogin()    # Fetch username
     file = open(f'C:\\Users\\{username}\\Desktop\\DefensiveBlocks.txt','w')
-    file.write('Please signup in our site in order to use our service.\nlink: https://defensiveblocks.pythonanywhere.com/\nyour username is: '+ str(username))
+    file.write('Please signup in our site in order to use our service.\n link: https://defensiveblocks.pythonanywhere.com/\n with username = ' + str(os.environ['COMPUTERNAME']))
     file.close()
 
 
@@ -26,7 +24,6 @@ def exb():
 """
 I had to replace shelve - in order to save vars forever (shelve doesnt work)
 this are the funcs
-
 """
 
 
@@ -73,6 +70,4 @@ def get(pattern):
         if str(parts[0]) == str(pattern):
             return parts[1].strip("\n")
     read_con.close()
-
-
 
