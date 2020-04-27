@@ -49,7 +49,6 @@ def create_vars_folder():
 
 
 try:
-    makeService()
     add_to_startup()
     create_vars_folder()
     create_var(final.active_field, 0)
