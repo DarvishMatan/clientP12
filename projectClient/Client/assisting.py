@@ -6,15 +6,7 @@ from finals import Finals as final
 import ctypes
 
 
-def popup():
-    ctypes.windll.user32.MessageBoxW(0, "Instruction text file named DefensiveBlocks.txt has created. Please read it.", "DefensiveBlocks", 1)
 
-
-def createDesktopFolder():
-    username = os.getlogin()    # Fetch username
-    file = open(f'C:\\Users\\{username}\\Desktop\\DefensiveBlocks.txt','w')
-    file.write('Please signup in our site in order to use our service.\n link: https://defensiveblocks.pythonanywhere.com/\n with username = ' + str(os.environ['COMPUTERNAME']))
-    file.close()
 
 
 def exb():
@@ -25,18 +17,6 @@ def exb():
 I had to replace shelve - in order to save vars forever (shelve doesnt work)
 this are the funcs
 """
-
-
-def create_vars_folder():
-    # define the name of the directory to be created
-    path = "../vars/"
-
-    try:
-        os.mkdir(path)
-    except OSError:
-        print("Creation of the directory %s failed" % path)
-    else:
-        print("Successfully created the directory %s " % path)
 
 
 def create_var(var,value):
