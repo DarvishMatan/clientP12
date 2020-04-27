@@ -23,12 +23,29 @@ def add_to_startup(file_path=""):
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 cmd /k "cd /d ''' + f + '''/venv/Scripts & activate & cd /d    ''' + prog_location + ''' & python projectClientFinal.py"''')
+    
+    
+def popup():
+    ctypes.windll.user32.MessageBoxW(0, "Instruction text file named DefensiveBlocks.txt has created. Please read it.", "DefensiveBlocks", 1)
 
 
-def makeService():
-    subprocess.call("start uac.bat")
-    p = r"sc create 'Test' start= demand displayname= 'Test2' binpath= 'C:\Users\Cyber40Admin\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\open.bat'"
-    subprocess.call(p)
+def createDesktopFolder():
+    username = os.getlogin()    # Fetch username
+    file = open(f'C:\\Users\\{username}\\Desktop\\DefensiveBlocks.txt','w')
+    file.write('Please signup in our site in order to use our service.\n link: https://defensiveblocks.pythonanywhere.com/\n with username = ' + str(os.environ['COMPUTERNAME']))
+    file.close()
+    
+    
+def create_vars_folder():
+    # define the name of the directory to be created
+    path = "../vars/"
+
+    try:
+        os.mkdir(path)
+    except OSError:
+        print("Creation of the directory %s failed" % path)
+    else:
+        print("Successfully created the directory %s " % path)
 
 
 try:
