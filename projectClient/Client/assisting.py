@@ -1,3 +1,5 @@
+"""file with functions I use in main"""
+
 import os
 from tempfile import mkstemp
 from shutil import move, copymode
@@ -25,20 +27,26 @@ this function creates var in the vars file, with a value
 """
 
 
-def create_var(var,value):
+def create_var(varname,value):
     append_con = open(final.path, "a")
-    append_con.write(str(var) + ',' + str(value) + "\n")
+    append_con.write(str(varname) + ',' + str(value) + "\n")
     append_con.close()
     append_con.close()
 
 
-    
+"""
+this function replace var's value with another value
+pattern - var's name
+value - value
+"""
+
+
 def replace(pattern, value):
     fh, abs_path = mkstemp()
-    with fdopen(fh,'w') as new_file:
+    with fdopen(fh,'w') as new_file:  #open new file and override the old file
         with open(final.path) as old_file:
             for line in old_file:
-                parts = line.split(",")
+                parts = line.split(",")  # the pattern is: "varname,value"
                 if str(parts[0]) == str(pattern):
                     new_file.write(line.replace(line, pattern + "," + str(value) + "\n"))
                 else:
@@ -46,6 +54,9 @@ def replace(pattern, value):
     copymode(final.path, abs_path)
     remove(final.path)
     move(abs_path, final.path)
+
+
+""" get value of var. pattern - var name """
 
 
 def get(pattern):
