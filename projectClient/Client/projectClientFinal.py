@@ -2,12 +2,13 @@
 
 import requests
 from finals import Finals as final
-from apscheduler.schedulers.blocking import BlockingScheduler
 from threading import Thread
 from assisting import *
 from devcon_automations import *
 from time import sleep
 import tkinter as tk
+import schedule
+
 
 
 """important global vars"""
@@ -15,7 +16,6 @@ import tkinter as tk
 
 getActivation = "http://defensiveblocks.pythonanywhere.com/clients/" + final.USERNAME + "/"
 getMsg = "http://defensiveblocks.pythonanywhere.com/clientsm/" + final.USERNAME + "/"
-scheduler = BlockingScheduler()
 wa = ""
 
 
@@ -79,6 +79,11 @@ def main():
         print("in else")
         return
 
-
+"""
 scheduler.add_job(main, 'cron', second=final.repeats)  # run every x seconds
 scheduler.start()
+"""
+
+schedule.every(15).seconds.do(main)
+while True:
+    schedule.run_pending()

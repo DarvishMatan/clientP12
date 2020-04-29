@@ -58,11 +58,11 @@ def create_vars_folder():
 
 
 try:
-    add_to_startup()
+    #add_to_startup()
     create_vars_folder()
     create_var(final.active_field, 0)
-    createDesktopFolder()
-    popup()
+    #createDesktopFolder()
+    #popup()
 
 
 except:
