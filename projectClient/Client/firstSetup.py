@@ -7,13 +7,15 @@ from pathlib import Path
 from finals import *
 import os
 import ctypes
-
+import pathlib
 
 
 prog_call = Path(__file__).absolute()
 prog_call = r'%s' % str(prog_call).replace('\\', '/')
 prog_location = os.path.split(prog_call)[0]
-f = r"C:\Users\Cyber40Admin\PycharmProjects\FinalProject"  # TODO chagne this
+
+
+f = pathlib.Path(__file__).parent.absolute().parent
 
 
 """add batch file to startup. replace in the future"""
@@ -25,7 +27,7 @@ def add_to_startup(file_path=""):
         bat_file.write('''@echo off
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
-cmd /k "cd /d ''' + f + '''/venv/Scripts & activate & cd /d    ''' + prog_location + ''' & python projectClientFinal.py"''')
+cmd /k "cd /d ''' + str(f) + '''/venv/Scripts & activate & cd /d    ''' + prog_location + ''' & python projectClientFinal.py"''')
     
 
 """ at first run, alert for instructions """
