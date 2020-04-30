@@ -55,10 +55,13 @@ def lock():
     mouse_devices = parser(devices, "mouse")  # get mouse
     Mouse_devices = parser(devices, "Mouse")  # get mouse
     keyboard_devices = parser(devices, "Keyboard")  # get keyboard
+    keyboard_devices = parser(devices, "keyboard") 
     #subprocess.call("devcon remove usb*")
     callDevcon("remove", mouse_devices)  # lock mouse
     callDevcon("remove", Mouse_devices)  # lock mouse
     callDevcon("remove", keyboard_devices)  # lock keyboard
+    callDevcon("remove", Keyboard_devices)
+
 
 
 """ unlock pc """
