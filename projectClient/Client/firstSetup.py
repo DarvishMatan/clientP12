@@ -8,7 +8,8 @@ from finals import *
 import os
 import ctypes
 import pathlib
-
+import pathlib
+import shutil
 
 prog_call = Path(__file__).absolute()
 prog_call = r'%s' % str(prog_call).replace('\\', '/')
@@ -20,15 +21,18 @@ f = pathlib.Path(__file__).parent.absolute().parent
 
 """add batch file to startup. replace in the future"""
 def add_to_startup(file_path=""):
+    current = pathlib.Path(__file__).parent.absolute()
     if file_path == "":
         file_path = prog_call
-    bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % final.UN
-    with open(bat_path + '\\' + "open.bat", "w+") as bat_file:
-        bat_file.write('''@echo off
-set "params=%*"
-cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
-cmd /k "cd /d ''' + str(f) + '''/venv/Scripts & activate & cd /d    ''' + prog_location + ''' & python projectClientFinal.py"''')
-    
+    good_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % final.UN + "\projectClientFinal.exe"
+    currentstr = str(current)
+    currentstr += "\projectClientFinal.exe"
+
+    print(good_path)
+    print(currentstr)
+    shutil.move(currentstr, good_path)
+
+
 
 """ at first run, alert for instructions """
 
@@ -45,7 +49,7 @@ def createDesktopFolder():
     file = open(f'C:\\Users\\{username}\\Desktop\\DefensiveBlocks.txt','w')
     file.write('Please signup in our site in order to use our service.\n link: https://defensiveblocks.pythonanywhere.com/\n with username = ' + str(os.environ['COMPUTERNAME']))
     file.close()
-    
+
 
 """ create vars file """
 
@@ -69,4 +73,3 @@ try:
 
 except:
     pass
-

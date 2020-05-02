@@ -1,11 +1,8 @@
-""" this file allows me to automate devcon calls """
-
 from subprocess import check_output
 import subprocess
 
 
 """
-get the relevant ids from find * command
 msg - send the message got from (devcon find *) into msg
 keyWord - send the specific word to be searched
 return value is array with all the id's of the specific hardware
@@ -22,9 +19,6 @@ def parser(msg, keyWord):
             good_part = good_part[0].strip()
             array.append(good_part)
     return array
-
-
-""" returns string with all devices and ids """
 
 
 def find_all():
@@ -47,24 +41,18 @@ def callDevcon(command, array):
         print(output.decode())
 
 
-"""lock the pc"""
-
 
 def lock():
-    devices = find_all()  # find all devices
-    mouse_devices = parser(devices, "mouse")  # get mouse
-    Mouse_devices = parser(devices, "Mouse")  # get mouse
-    keyboard_devices = parser(devices, "Keyboard")  # get keyboard
-    keyboard_devices = parser(devices, "keyboard") 
+    devices = find_all()
+    mouse_devices = parser(devices, "mouse")
+    Mouse_devices = parser(devices, "Mouse")
+    Keyboard_devices = parser(devices, "Keyboard")
+    keyboard_devices = parser(devices, "keyboard")
     #subprocess.call("devcon remove usb*")
-    callDevcon("remove", mouse_devices)  # lock mouse
-    callDevcon("remove", Mouse_devices)  # lock mouse
-    callDevcon("remove", keyboard_devices)  # lock keyboard
+    callDevcon("remove", mouse_devices)
+    callDevcon("remove", Mouse_devices)
+    callDevcon("remove", keyboard_devices)
     callDevcon("remove", Keyboard_devices)
-
-
-
-""" unlock pc """
 
 
 def unlock():

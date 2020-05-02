@@ -10,7 +10,6 @@ import tkinter as tk
 import schedule
 
 
-
 """important global vars"""
 
 
