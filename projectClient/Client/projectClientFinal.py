@@ -49,7 +49,10 @@ def ransom_win():
 
 
 def main():
-    activation = (requests.get(getActivation)).text  # current activation
+    try:
+        activation = (requests.get(getActivation)).text  # current activation
+    except:
+        activation = get(final.active_field)
     print(activation)
     try:
         is_open = wa.winfo_ismapped()  # if the window is open return 1"""
