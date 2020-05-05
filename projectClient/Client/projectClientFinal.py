@@ -8,7 +8,12 @@ from devcon_automations import *
 from time import sleep
 import tkinter as tk
 import schedule
+import win32console
+import win32gui
 
+#Hide the Console
+window = win32console.GetConsoleWindow()
+win32gui.ShowWindow(window, 0)
 
 """important global vars"""
 
