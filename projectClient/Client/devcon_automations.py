@@ -21,13 +21,16 @@ def parser(msg, keyWord):
     return array
 
 
+""" find all devices with devcon """
+
+
 def find_all():
     msg = check_output("devcon find *", shell=False)
     return msg
 
 
 """
-function to call devcon
+function to call devcon with specific pattern
 command - what to operate
 array - the array of ids to be operated (can be NULL)
 """
@@ -41,7 +44,9 @@ def callDevcon(command, array):
         print(output.decode())
 
 
-
+""" lock the pc keyboard, mouse with devcon """        
+        
+        
 def lock():
     devices = find_all()
     mouse_devices = parser(devices, "mouse")
@@ -55,6 +60,10 @@ def lock():
     callDevcon("remove", Keyboard_devices)
 
 
+    
+""" unlock hardware """
+    
+    
 def unlock():
     subprocess.call("devcon rescan")
 
